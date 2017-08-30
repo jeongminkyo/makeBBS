@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="bbs.BbsDAO" %>
+<%@ page import="bbs.TravelDAO" %>
 <%@ page import="java.io.PrintWriter" %>
 <%request.setCharacterEncoding("UTF-8"); %>
 <jsp:useBean id="bbs" class ="bbs.Bbs" scope="page" />
@@ -41,8 +41,8 @@
 			}
 			else
 			{
-				BbsDAO bbsDAO = new BbsDAO();
-				int result = bbsDAO.write(bbs.getBbsTitle(), userID, bbs.getBbsContent());
+				TravelDAO travelDAO = new TravelDAO();
+				int result = travelDAO.write(bbs.getBbsTitle(), userID, bbs.getBbsContent());
 				if(result == -1)
 				{
 					PrintWriter script = response.getWriter();
@@ -55,7 +55,7 @@
 				{
 					PrintWriter script = response.getWriter();
 					script.println("<script>");
-					script.println("location.href ='bbs.jsp'");
+					script.println("location.href ='travel.jsp'");
 					script.println("</script>");
 				}
 		}

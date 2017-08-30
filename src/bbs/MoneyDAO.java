@@ -6,12 +6,12 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 
-public class BbsDAO {
+public class MoneyDAO {
 
 	private Connection conn;
 	private ResultSet rs;
 	
-	public BbsDAO()
+	public MoneyDAO()
 	{
 		try{
 			String dbURL = "jdbc:mysql://localhost:3306/BBS";
@@ -43,7 +43,7 @@ public class BbsDAO {
 	
 	public int getNext()
 	{
-		String SQL = "SELECT bbsID FROM BBS ORDER BY bbsID DESC";
+		String SQL = "SELECT bbsID FROM money ORDER BY bbsID DESC";
 		try{
 			PreparedStatement pstmt = conn.prepareStatement(SQL);
 			rs = pstmt.executeQuery();
@@ -60,7 +60,7 @@ public class BbsDAO {
 	
 	public int write(String bbsTitle, String userID, String bbsContent)
 	{
-		String SQL = "INSERT INTO BBS VALUES (?, ?, ?, ?, ?, ?)";
+		String SQL = "INSERT INTO money VALUES (?, ?, ?, ?, ?, ?)";
 		try{
 			PreparedStatement pstmt = conn.prepareStatement(SQL);
 			pstmt.setInt(1,getNext());
@@ -78,7 +78,7 @@ public class BbsDAO {
 	}
 	
 	public ArrayList<Bbs> getList(int pageNumber){
-		String SQL = "SELECT * FROM BBS WHERE bbsID < ? AND bbsAvailable = 1 ORDER BY bbsID DESC LIMIT 10 ";
+		String SQL = "SELECT * FROM money WHERE bbsID < ? AND bbsAvailable = 1 ORDER BY bbsID DESC LIMIT 10 ";
 		ArrayList<Bbs> list= new ArrayList<Bbs>();
 		try
 		{
@@ -104,7 +104,7 @@ public class BbsDAO {
 	
 	public boolean nextPage(int pageNumber)
 	{
-		String SQL = "SELECT * FROM BBS WHERE bbsID < ? AND bbsAvailable = 1 ";
+		String SQL = "SELECT * FROM money WHERE bbsID <? AND bbsAvailable = 1 ";
 		ArrayList<Bbs> list = new ArrayList<Bbs>();
 		try
 		{
@@ -124,7 +124,7 @@ public class BbsDAO {
 	
 	public Bbs getBbs(int bbsID)
 	{
-		String SQL = "SELECT * FROM BBS WHERE bbsID =? ";
+		String SQL = "SELECT * FROM money WHERE bbsID =? ";
 		try
 		{
 			PreparedStatement pstmt = conn.prepareStatement(SQL);
@@ -150,7 +150,7 @@ public class BbsDAO {
 	
 	public int update(int bbsID, String bbsTitle,String bbsContent)
 	{
-		String SQL = "UPDATE BBS SET bbsTitle = ?, bbsContent = ? WHERE bbsID = ?";
+		String SQL = "UPDATE money SET bbsTitle = ?, bbsContent = ? WHERE bbsID = ?";
 		try{
 			PreparedStatement pstmt = conn.prepareStatement(SQL);
 			pstmt.setString(1, bbsTitle);
@@ -166,7 +166,7 @@ public class BbsDAO {
 	
 	public int delete(int bbsID)
 	{
-		String SQL = "UPDATE BBS SET bbsAvailable = 0 WHERE bbsID = ?";
+		String SQL = "UPDATE money SET bbsAvailable = 0 WHERE bbsID = ?";
 		try{
 			PreparedStatement pstmt = conn.prepareStatement(SQL);
 			pstmt.setInt(1, bbsID);

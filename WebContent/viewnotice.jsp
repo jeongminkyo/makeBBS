@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ page import ="java.io.PrintWriter" %>
 <%@ page import ="bbs.Bbs" %>
-<%@ page import ="bbs.BbsDAO" %>
+<%@ page import ="bbs.NoticeDAO" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -32,7 +32,7 @@
 			script.println("location.href = 'bbs.jsp'");
 			script.println("</script>");
 		}
-		Bbs bbs = new BbsDAO().getBbs(bbsID);
+		Bbs bbs = new NoticeDAO().getBbs(bbsID);
 	%>
 	<nav class="navbar navbar-default">
 		<div class="navbar-header">
@@ -48,10 +48,10 @@
 		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 			<ul class="nav navbar-nav">
 				<li><a href="main.jsp">메인</a></li>
-				<li><a href="notice.jsp">공지사항</a></li>
+				<li class="active"><a href="notice.jsp">공지사항</a></li>
 				<li><a href="money.jsp">회비관리</a></li>
 				<li><a href="travel.jsp">여행지</a></li>
-				<li class="active"><a href="bbs.jsp">자유게시판</a></li>
+				<li><a href="bbs.jsp">자유게시판</a></li>
 				<li><a href="chat.jsp">채팅</a></li>
 			</ul>
 			<%
@@ -114,13 +114,13 @@
 					</tr>
 				</tbody>
 			</table>
-			<a href="bbs.jsp" class="btn btn-primary">목록</a>
+			<a href="notice.jsp" class="btn btn-primary">목록</a>
 			<%
 				if(userID !=null && userID.equals(bbs.getUserID()))
 				{
 			%>
-					<a href="update.jsp?bbsID=<%=bbsID %>" class="btn btn-primary">수정</a>
-					<a onclick="return confirm('정말로 삭제하시겠습니까?')" href="deleteAction.jsp?bbsID=<%=bbsID %>" class="btn btn-primary">삭제</a>
+					<a href="updatenotice.jsp?bbsID=<%=bbsID %>" class="btn btn-primary">수정</a>
+					<a onclick="return confirm('정말로 삭제하시겠습니까?')" href="deleteNoticeAction.jsp?bbsID=<%=bbsID %>" class="btn btn-primary">삭제</a>
 			<%	
 				}
 			%>
